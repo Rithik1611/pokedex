@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/controller/home_page_controller.dart';
 import 'package:pokedex/models/page_data.dart';
+import 'package:pokedex/models/pokemon.dart';
+import 'package:pokedex/widget/pokemon_list_tile.dart';
 
 final homePageControllerProvider =
     StateNotifierProvider<HomePageController, HomePageData>(
@@ -62,9 +64,10 @@ class _HomePageState extends ConsumerState<HomePage> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.60,
             child: ListView.builder(
-              itemCount: 0,
+              itemCount: _homePageData.data?.results?.length ?? 0,
               itemBuilder: (context, index) {
-                return const ListTile();
+                PokemonListResult pokemon = _homePageData.data!.results![index];
+                return PokemonListTile(pokemonurl: pokemon.url!);
               },
             ),
           )
