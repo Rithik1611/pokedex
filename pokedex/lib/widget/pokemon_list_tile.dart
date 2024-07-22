@@ -25,10 +25,17 @@ class PokemonListTile extends ConsumerWidget {
     return Skeletonizer(
       enabled: isLoading,
       child: ListTile(
+        leading: pokemon != null
+            ? CircleAvatar(
+                backgroundImage: NetworkImage(pokemon.sprites!.frontDefault!),
+              )
+            : CircleAvatar(),
         title: Text(pokemon != null
             ? pokemon.name!.toUpperCase()
             : "Currently loading your Pokemon"),
         subtitle: Text("Has ${pokemon?.moves?.length.toString() ?? 0} moves"),
+        trailing:
+            IconButton(onPressed: () {}, icon: Icon(Icons.favorite_border)),
       ),
     );
   }
